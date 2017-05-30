@@ -35,5 +35,8 @@
     "webpack": "^2.6.1",
     "webpack-stream": "^3.2.0",
     "yargs": "^8.0.1"
+  },
+  "jest": {
+    "testRegex": "__tests__/(.*).test.js$"
   }
 }
