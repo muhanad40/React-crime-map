@@ -1,5 +1,11 @@
+let today = new Date()
+
 let initialState = {
-    crimeDate: null,
+    crimeLocation: {
+        lat: 52.629729,
+        lng: -1.131592
+    },
+    crimeDate: `${today.getFullYear()}-${today.getMonth()-1}`,
     crimes: []
 }
 
