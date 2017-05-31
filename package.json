@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "./node_modules/.bin/jest --verbose",
-    "build": "gulp build"
+    "build": "gulp build",
+    "start": "gulp build && open index.html"
   },
   "author": "Muhanad Al-Rubaiee <muhanad40@gmail.com>",
   "license": "MIT",
