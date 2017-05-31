@@ -28,10 +28,7 @@ const webpack = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
-                query: {
-                    presets: ["env", "react"]
-                }
+                loader: "babel-loader"
             }
         ]
     },
