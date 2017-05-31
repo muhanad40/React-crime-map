@@ -7,6 +7,9 @@
   "author": "Muhanad Al-Rubaiee <muhanad40@gmail.com>",
   "license": "MIT",
   "babel": {
+    "plugins": [
+      "transform-class-properties"
+    ],
     "presets": [
       "env",
       "react"
@@ -20,11 +23,13 @@
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "superagent": "^3.5.2"
+    "superagent": "^3.5.2",
+    "gmaps-marker-clusterer": "github:edgefolio/gmaps-marker-clusterer#1.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.24.1",
     "gulp": "^3.9.1",
