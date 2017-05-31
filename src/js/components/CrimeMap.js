@@ -23,10 +23,6 @@ export class CrimeMap extends Component {
         }
     }
 
-    shouldComponentUpdate(nextProps) {
-        return nextProps.crimeDate == this.props.crimeDate
-    }
-
     componentDidUpdate(prevProps) {
         this.clearAllMarkers()
         this.createMapMarkers()
@@ -39,7 +35,6 @@ export class CrimeMap extends Component {
         this.markers = []
         this.bounds = new google.maps.LatLngBounds()
 
-        console.log(this.props.crimes)
         this.props.crimes.forEach(function iterateResults(crime, index) {
             if(!crime.location) { return }
 

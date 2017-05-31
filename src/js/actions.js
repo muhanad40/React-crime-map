@@ -1,11 +1,7 @@
 import superagent from 'superagent'
 
-export function setCrimeDate(date) {
-    return {
-        type: 'SET_CRIME_DATE',
-        date
-    }
-}
+let today = new Date(),
+    fetchCrimesTimer = null
 
 export function storeCrimes(crimes) {
     return {
@@ -14,20 +10,22 @@ export function storeCrimes(crimes) {
     }
 }
 
-export function fetchCrimes() {
-	return (dispatch, getState) => {
-		let state = getState().appReducer,
-			lat   = state.crimeLocation.lat,
-			lng   = state.crimeLocation.lng,
-			date  = state.crimeDate
+export function fetchCrimes(date=`${today.getFullYear()}-${today.getMonth()-1}`) {
+    return (dispatch, getState) => {
+        let state = getState().appReducer,
+            lat   = state.crimeLocation.lat,
+            lng   = state.crimeLocation.lng
 
-		dispatch({
-			type: 'FETCH_CRIMES'
-		})
+        clearTimeout(fetchCrimesTimer)
+        fetchCrimesTimer = setTimeout(() => {
+            dispatch({
+                type: 'FETCH_CRIMES'
+            })
 
-		superagent.get(`https://data.police.uk/api/crimes-street/all-crime?lat=${lat}&lng=${lng}&date=${date}`)
-			.end((err, res) => {
-				dispatch(storeCrimes(res.body))
-			})
-	}
+            superagent.get(`https://data.police.uk/api/crimes-street/all-crime?lat=${lat}&lng=${lng}&date=${date}`)
+                .end((err, res) => {
+                    dispatch(storeCrimes(res.body))
+                })
+        }, 300);
+    }
 }
