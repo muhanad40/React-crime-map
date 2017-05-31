@@ -2,6 +2,13 @@
 
 This is a simple React application that places markers on a map for crimes that have happened in a certain area. To keep things simple I've chosen `lat: 52.629729` and `lng: -1.131592` to be the location of search.
 
+### The stack
+- React
+- Redux
+- Jest
+- Webpack
+- Gulp
+
 ### Local installation
 ```
 git clone git@github.com:muhanad40/React-crime-map.git
