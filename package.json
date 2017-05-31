@@ -2,7 +2,8 @@
   "name": "React-crime-map",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "npm rebuild node-sass && gulp build"
+    "test": "./node_modules/.bin/jest --verbose",
+    "build": "gulp build"
   },
   "author": "Muhanad Al-Rubaiee <muhanad40@gmail.com>",
   "license": "MIT",
