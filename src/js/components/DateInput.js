@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchCrimes, setCrimeDate } from '../actions'
 
-class DatePicker extends React.Component {
+class DateInput extends React.Component {
     onDateChange = (e) => {
         this.props.dispatch(fetchCrimes(e.target.value))
     }
@@ -12,10 +12,10 @@ class DatePicker extends React.Component {
             initialDate = `${today.getFullYear()}-${today.getMonth()-1}`
 
         return (
-            <div>
+            <div className="date">
                 <strong>Enter a crime date (YYYY-MM):</strong>
 
-                <input type="text" defaultValue={ initialDate } onChange={ this.onDateChange }/>
+                <input type="text" className="date__input" defaultValue={ initialDate } onChange={ this.onDateChange }/>
             </div>
         )
     }
@@ -27,4 +27,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(DatePicker)
+export default connect(mapStateToProps)(DateInput)
