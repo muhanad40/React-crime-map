@@ -8,7 +8,7 @@ export class CrimeMap extends Component {
     markerClusterer = null
 
     componentWillMount() {
-        this.props.fetchCrimes()
+        this.props.dispatch(fetchCrimes())
     }
 
     componentDidMount() {
@@ -23,7 +23,12 @@ export class CrimeMap extends Component {
         }
     }
 
-    componentDidUpdate() {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.crimeDate == this.props.crimeDate
+    }
+
+    componentDidUpdate(prevProps) {
+        this.clearAllMarkers()
         this.createMapMarkers()
         this.map.fitBounds(this.bounds)
         this.createMarkerClusters()
@@ -65,6 +70,19 @@ export class CrimeMap extends Component {
         })
     }
 
+    clearAllMarkers() {
+        if(this.markerClusterer) {
+            this.markerClusterer.removeMarkers(this.markers)
+        }
+        if(this.markers && this.markers.length) {
+            this.markers.forEach(function iterateMarkers(marker) {
+                marker.setMap(null)
+            })
+            this.markers = []
+            this.bounds = new google.maps.LatLngBounds(null)
+        }
+    }
+
     render() {
         return (
             <div className="js-map" style={ {height: '600px'} }></div>
@@ -75,6 +93,7 @@ export class CrimeMap extends Component {
 let mapStateToProps = (state) => {
     return {
         crimes: state.appReducer.crimes,
+        crimeDate: state.appReducer.crimeDate,
         crimeLocation: {
             lat: state.appReducer.crimeLocation.lat,
             lng: state.appReducer.crimeLocation.lng
@@ -82,12 +101,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        fetchCrimes: () => {
-            dispatch(fetchCrimes())
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CrimeMap)
+export default connect(mapStateToProps)(CrimeMap)
